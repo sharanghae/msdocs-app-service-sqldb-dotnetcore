@@ -26,6 +26,8 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: dotnet publish
+        run: dotnet tool install -g dotnet-ef
+        run: dotnet ef migrations bundle -p DotNetCoreSqlDb/DotNetCoreSqlDb.csproj -o ${{env.DOTNET_ROOT}}/myapp/migrate
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
